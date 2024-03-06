@@ -37,6 +37,8 @@ pipeline {
                     // Print a message for the 'Deploy' stage
                     echo 'Deploying....!!'
                     // Additional deployment steps can be added here
+                     // Simulate an error in the deployment stage
+                    sh 'exit 1' // This command will intentionally fail
                 }
             }
         
@@ -50,3 +52,4 @@ pipeline {
          }
       }
     }
+}
