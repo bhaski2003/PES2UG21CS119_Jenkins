@@ -39,7 +39,7 @@ pipeline {
                     // Additional deployment steps can be added here
                 }
             }
-        }
+        
 
         post {
             failure {
@@ -47,6 +47,7 @@ pipeline {
                 echo 'Pipeline failed!'
                 // Additional error handling can be added here
             }
-        }
+         }
+      }
     }
 }
