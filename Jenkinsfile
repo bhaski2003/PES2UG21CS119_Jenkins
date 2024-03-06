@@ -13,7 +13,7 @@ pipeline {
                 script {
                     // Build stage: Compile the .cpp file
                     echo 'Building.....!!'
-                    // Notify changes in the repository and look for any updates
+                    // wud get Notified by our hero -> webHook for changes in the rep and look for any updates
                     sh "g++ -o ${SRN}_executable ${SRN}_1.cpp"
                 }
             }
@@ -42,14 +42,25 @@ pipeline {
 
     post {
         // Post-build actions
+        success {
+            echo 'Pipeline succeeded!'
+            // Additional actions for success (if any)
+        }
+
         failure {
             echo 'Pipeline failed!'
             // Additional actions for failure (if any)
         }
-        // Uncomment and add actions for success if needed
-        // success {
-        //     echo 'Pipeline succeeded!'
-        //     // Additional actions for success (if any)
-        // }
+
+        // Declarative Post Actions with timeout and retry
+        always {
+            timeout(time: 1, unit: 'HOURS') {
+                echo 'This will always execute with a timeout of 1 hour.'
+            }
+
+            retry(3) {
+                echo 'This will be retried up to 3 times.'
+            }
+        }
     }
 }
