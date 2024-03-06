@@ -35,6 +35,8 @@ pipeline {
                 script {
                     // Deploy stage: Deployment steps
                     echo 'Deploying....!!'
+                     // Simulate an error in the deployment stage
+                      sh 'exit 1' // This command will intentionally fail
                 }
             }
         }
