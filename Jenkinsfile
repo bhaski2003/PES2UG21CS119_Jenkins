@@ -43,13 +43,19 @@ pipeline {
             }
         
 
-        post {
-            failure {
-                // Display a message if the pipeline fails
-                echo 'Pipeline failed!'
-                // Additional error handling can be added here
-            }
-         }
-      }
+      post {
+        success {
+            echo 'Pipeline succeeded!'
+
+            // Additional actions to be performed on success
+            // e.g., notification, artifact archiving, etc.
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+
+            // Additional actions to be performed on failure
+            // e.g., notification, cleanup, etc.
+        }
     }
 }
