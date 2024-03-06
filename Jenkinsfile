@@ -1,19 +1,19 @@
 pipeline {
-    agent any 
+    agent any
 
     environment {
-        // Define environment variable for SRN
+        // Define environment variables
         SRN = 'PES2UG21CS119'
-        // Additional comment for clarity
+        // Additional code for readability, to be used in further stages
     }
 
     stages {
         stage('Build') {
             steps {
                 script {
-                    // Print a message for the 'Build' stage
+                    // Build stage: Compile the .cpp file
                     echo 'Building.....!!'
-                    // Compile the .cpp file using g++
+                    // Notify changes in the repository and look for any updates
                     sh "g++ -o ${SRN}_executable ${SRN}_1.cpp"
                 }
             }
@@ -22,11 +22,10 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Print a message for the 'Test' stage
+                    // Test stage: Print output of compiled .cpp file
                     echo 'Testing.....!!'
-                    // Run the compiled executable
                     sh "./${SRN}_executable"
-                    // It's similar to cout << PES2UG21CS119.exe 
+                    // Equivalent to cout << PES2UG21CS119.exe
                 }
             }
         }
@@ -34,28 +33,23 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Print a message for the 'Deploy' stage
+                    // Deploy stage: Deployment steps
                     echo 'Deploying....!!'
-                    // Additional deployment steps can be added here
-                     // Simulate an error in the deployment stage
-                    sh 'exit 1' // This command will intentionally fail
                 }
             }
-        
-
-      post {
-        success {
-            echo 'Pipeline succeeded!'
-
-            // Additional actions to be performed on success
-            // e.g., notification, artifact archiving, etc.
         }
+    }
 
+    post {
+        // Post-build actions
         failure {
             echo 'Pipeline failed!'
-
-            // Additional actions to be performed on failure
-            // e.g., notification, cleanup, etc.
+            // Additional actions for failure (if any)
         }
+        // Uncomment and add actions for success if needed
+        // success {
+        //     echo 'Pipeline succeeded!'
+        //     // Additional actions for success (if any)
+        // }
     }
 }
